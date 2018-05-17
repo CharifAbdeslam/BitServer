@@ -9,7 +9,20 @@ const ethTicker = {
   channel: 'ticker',
   symbol: 'tETHBTC'
 };
-require('./ticker')(ethTicker,http,io,w);
+const bchTicker = {
+  event: 'subscribe',
+  channel: 'ticker',
+  symbol: 'tBCHBTC'
+}
+const tickerEthIoEmit = "tickerEth";
+const tickerBchIoEmit = "tickerBch";
+require('./ticker')(ethTicker,http,io,w,tickerEthIoEmit);
+require('./ticker')(bchTicker,http,io,w,tickerBchIoEmit);
+
+
+
+
+
 http.listen(3001, (err) => {
   console.log("App up and running on port: 3001");
 });
