@@ -46,6 +46,26 @@ const dshTicker = {
   channel: 'ticker',
   symbol: 'tDSHBTC'
 };
+const neoTicker = {
+  event: 'subscribe',
+  channel: 'ticker',
+  symbol: 'tNEOBTC'
+};
+const zecTicker = {
+  event: 'subscribe',
+  channel: 'ticker',
+  symbol: 'tZECBTC'
+};
+const eosTicker = {
+  event: 'subscribe',
+  channel: 'ticker',
+  symbol: 'tEOSBTC'
+};
+const omgTicker = {
+  event: 'subscribe',
+  channel: 'ticker',
+  symbol: 'tOMGBTC'
+};
   w.on('message', (msg) => {
       respanse = JSON.parse(msg)
       if(respanse.pair === 'ETHBTC'){
@@ -72,12 +92,24 @@ const dshTicker = {
       if(respanse.pair === 'DSHBTC'){
         chanId = Object.assign({},chanId,{dsh:respanse});
       }
+      if(respanse.pair === 'NEOBTC'){
+        chanId = Object.assign({},chanId,{neo:respanse});
+      }
+      if(respanse.pair === 'ZECBTC'){
+        chanId = Object.assign({},chanId,{zec:respanse});
+      }
+      if(respanse.pair === 'EOSBTC'){
+        chanId = Object.assign({},chanId,{eos:respanse});
+      }
+      if(respanse.pair === 'OMGBTC'){
+        chanId = Object.assign({},chanId,{omg:respanse});
+      }
       io.emit("channelID",chanId);
       if(respanse[1] !== "hb"){
         io.emit("ticker",respanse);
       }
     });
-let eth = JSON.stringify(ethTicker);
+let eth= JSON.stringify(ethTicker);
 let bch= JSON.stringify(bchTicker);
 let xrp= JSON.stringify(xrpTicker);
 let ltc= JSON.stringify(ltcTicker);
@@ -85,14 +117,25 @@ let xmr= JSON.stringify(xmrTicker);
 let etc= JSON.stringify(etcTicker);
 let iot= JSON.stringify(iotTicker);
 let dsh= JSON.stringify(dshTicker);
-w.on('open', () => w.send(eth));
-w.on('open', () => w.send(bch));
-w.on('open', () => w.send(xrp));
-w.on('open', () => w.send(ltc));
-w.on('open', () => w.send(xmr));
-w.on('open', () => w.send(etc));
-w.on('open', () => w.send(iot));
-w.on('open', () => w.send(dsh));
+let neo= JSON.stringify(neoTicker);
+let zec= JSON.stringify(zecTicker);
+let eos= JSON.stringify(eosTicker);
+let omg= JSON.stringify(omgTicker);
+w.on('open', () =>{
+  w.send(eth);
+  w.send(bch);
+  w.send(xrp);
+  w.send(ltc);
+  w.send(xmr);
+  w.send(etc);
+  w.send(iot);
+  w.send(dsh);
+  w.send(neo);
+  w.send(zec);
+  w.send(eos);
+  w.send(omg);
+});
+
 http.listen(3001, (err) => {
   console.log("App up and running on port: 3001");
 });
