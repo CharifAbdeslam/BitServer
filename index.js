@@ -30,12 +30,13 @@ const neoTicker = new Payload('ticker','tNEOBTC');
 const zecTicker = new Payload('ticker','tZECBTC');
 const eosTicker = new Payload('ticker','tEOSBTC');
 const omgTicker = new Payload('ticker','tOMGBTC');
+const xvgTicker = new Payload('ticker','tXVGBTC');
+const gntTicker = new Payload('ticker','tGNTBTC');
+const qtmTicker = new Payload('ticker','tQTMBTC');
   w.on('message', (msg) => {
       respanse = JSON.parse(msg)
       if(respanse.pair === 'ETHBTC'){
-          if(respanse.channel === 'ticker'){
-            chanId = Object.assign({},chanId,{eth:respanse});
-          }
+        chanId = Object.assign({},chanId,{eth:respanse});
       }
       if(respanse.pair === 'BCHBTC'){
         chanId = Object.assign({},chanId,{bch:respanse});
@@ -70,6 +71,15 @@ const omgTicker = new Payload('ticker','tOMGBTC');
       if(respanse.pair === 'OMGBTC'){
         chanId = Object.assign({},chanId,{omg:respanse});
       }
+      if(respanse.pair === 'XVGBTC'){
+        chanId = Object.assign({},chanId,{xvg:respanse});
+      }
+      if(respanse.pair === 'GNTBTC'){
+        chanId = Object.assign({},chanId,{gnt:respanse});
+      }
+      if(respanse.pair === 'QTMBTC'){
+        chanId = Object.assign({},chanId,{qtm:respanse});
+      }
       io.emit("channelID",chanId);
       if(respanse[1] !== "hb"){
         io.emit("ticker",respanse);
@@ -89,6 +99,9 @@ w.on('open', () =>{
   w.send(JSON.stringify(zecTicker));
   w.send(JSON.stringify(eosTicker));
   w.send(JSON.stringify(omgTicker));
+  w.send(JSON.stringify(xvgTicker));
+  w.send(JSON.stringify(gntTicker));
+  w.send(JSON.stringify(qtmTicker));
 });
 
 http.listen(3001, (err) => {
