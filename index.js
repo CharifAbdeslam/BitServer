@@ -1,9 +1,17 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 const ws = require('ws');
 const io = require('socket.io')(http);
 const w = new ws('wss://api.bitfinex.com/ws/2');
 
+app.use(express.static("public"))
+app.get('/', function(req, res){
+  res.send('index');
+});
+app.get("/exchange",function(req,res){
+  res.send("you are in the exchange here");
+})
 let chanId={};
 function Payload(channel,symbol){
   this.event = 'subscribe';
@@ -67,7 +75,7 @@ const omgTicker = new Payload('ticker','tOMGBTC');
         io.emit("ticker",respanse);
       }
     });
-    
+
 w.on('open', () =>{
   w.send(JSON.stringify(ethTicker));
   w.send(JSON.stringify(bchTicker));
