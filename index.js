@@ -12,7 +12,7 @@ app.get('/', function(req, res){
 app.get("/exchange",function(req,res){
   res.send("you are in the exchange here");
 })
-let chanId={};
+let tickerChanell={};
 function Payload(channel,symbol){
   this.event = 'subscribe';
   this.channel = channel;
@@ -36,51 +36,51 @@ const qtmTicker = new Payload('ticker','tQTMBTC');
   w.on('message', (msg) => {
       respanse = JSON.parse(msg)
       if(respanse.pair === 'ETHBTC'){
-        chanId = Object.assign({},chanId,{eth:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{eth:respanse});
       }
       if(respanse.pair === 'BCHBTC'){
-        chanId = Object.assign({},chanId,{bch:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{bch:respanse});
       }
       if(respanse.pair === 'XRPBTC'){
-        chanId = Object.assign({},chanId,{xrp:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{xrp:respanse});
       }
       if(respanse.pair === 'LTCBTC'){
-        chanId = Object.assign({},chanId,{ltc:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{ltc:respanse});
       }
       if(respanse.pair === 'XMRBTC'){
-        chanId = Object.assign({},chanId,{xmr:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{xmr:respanse});
       }
       if(respanse.pair === 'ETCBTC'){
-        chanId = Object.assign({},chanId,{etc:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{etc:respanse});
       }
       if(respanse.pair === 'IOTBTC'){
-        chanId = Object.assign({},chanId,{iot:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{iot:respanse});
       }
       if(respanse.pair === 'DSHBTC'){
-        chanId = Object.assign({},chanId,{dsh:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{dsh:respanse});
       }
       if(respanse.pair === 'NEOBTC'){
-        chanId = Object.assign({},chanId,{neo:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{neo:respanse});
       }
       if(respanse.pair === 'ZECBTC'){
-        chanId = Object.assign({},chanId,{zec:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{zec:respanse});
       }
       if(respanse.pair === 'EOSBTC'){
-        chanId = Object.assign({},chanId,{eos:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{eos:respanse});
       }
       if(respanse.pair === 'OMGBTC'){
-        chanId = Object.assign({},chanId,{omg:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{omg:respanse});
       }
       if(respanse.pair === 'XVGBTC'){
-        chanId = Object.assign({},chanId,{xvg:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{xvg:respanse});
       }
       if(respanse.pair === 'GNTBTC'){
-        chanId = Object.assign({},chanId,{gnt:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{gnt:respanse});
       }
       if(respanse.pair === 'QTMBTC'){
-        chanId = Object.assign({},chanId,{qtm:respanse});
+        tickerChanell = Object.assign({},tickerChanell,{qtm:respanse});
       }
-      io.emit("channelID",chanId);
+      io.emit("tickerChanell",tickerChanell);
       if(respanse[1] !== "hb"){
         io.emit("ticker",respanse);
       }
