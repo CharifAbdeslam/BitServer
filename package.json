@@ -1,6 +1,6 @@
 {
   "name": "bitserver",
-  "hostname":"http://localhost/",
+  "hostname": "http://localhost/",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
